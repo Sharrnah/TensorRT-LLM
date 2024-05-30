@@ -21,6 +21,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Optional, Union
+from dataclasses import dataclass, field
 
 import tensorrt as trt
 
@@ -447,11 +448,11 @@ class BuildConfig:
     use_refit: bool = False
     input_timing_cache: str = None
     output_timing_cache: str = None
-    lora_config: LoraConfig = LoraConfig()
-    auto_parallel_config: AutoParallelConfig = AutoParallelConfig()
+    lora_config: LoraConfig = field(default_factory=lambda: LoraConfig())
+    auto_parallel_config: AutoParallelConfig = field(default_factory=lambda: AutoParallelConfig())
     weight_sparsity: bool = False
     weight_streaming: bool = False
-    plugin_config: PluginConfig = PluginConfig()
+    plugin_config: PluginConfig = field(default_factory=lambda: PluginConfig())
     use_strip_plan: bool = False
     max_encoder_input_len: int = 1  # for enc-dec DecoderModel
     use_fused_mlp: bool = False
